@@ -8,6 +8,7 @@
 <body>
   <header class="header">
     <nav class="navbar">
+      
 
       <ul class="nav-links">
         <li><a href="#Highlights">Highlights</a>
@@ -20,6 +21,16 @@
         <li><a href="#ConstructorStandings">Teams's Standings</a>
         <li><a href="#more-info-section">More Info about 2026 season!</a>
       </ul>
+      <div class="auth-buttons">
+        @if (Route::has('login'))
+            @auth
+                <a href="{{ url('/dashboard') }}" class="btn-auth">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="btn-auth">Login</a>
+                <a href="{{ route('register') }}" class="btn-auth">Register</a>
+            @endauth
+        @endif
+    </div>
     </nav>
   </header>
 
