@@ -131,209 +131,50 @@
     <th>Nationality</th>
     <th>Team</th>
   </tr>
+  
+  @foreach ($drivers as $index => $driver)
   <tr>
-    <td>1</td>
-    <td>Lando Norris</td>
-    <td>423</td>
-    <td>Great Britain</td>
-    <td>McLaren</td>
+    <td>{{ $index + 1 }}</td> <td>{{ $driver->name }}</td>
+    <td>{{ $driver->points }}</td>
+    <td>{{ $driver->nationality }}</td>
+    <td>{{ $driver->team->name }}</td>
+    <td>
+        <form action="/drivers/{{ $driver->id }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" onclick="return confirm('Do you want to delete this driver?')" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold;">
+                [X]
+            </button>
+        </form>
+    </td>
   </tr>
-  <tr>
-    <td>2</td>
-    <td>Max Verstappen</td>
-    <td>421</td>
-    <td>Netherlands</td>
-    <td>RedBull Racing</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Oscar Piastri</td>
-    <td>410</td>
-    <td>Australia</td>
-    <td>McLaren</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>George Russell</td>
-    <td>319</td>
-    <td>Great Britain</td>
-    <td>Mercedes</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Charles Leclerc</td>
-    <td>242</td>
-    <td>Monaco</td>
-    <td>Ferrari</td>
-  </tr>
-    <tr>
-    <td>6</td>
-    <td>Lewis Hamilton</td>
-    <td>156</td>
-    <td>Great Britain</td>
-    <td>Ferrari</td>
-  </tr>
-    <tr>
-    <td>7</td>
-    <td>Kimi Antonelli</td>
-    <td>150</td>
-    <td>Italia</td>
-    <td>Mercedes</td>
-  </tr>
-    <tr>
-    <td>8</td>
-    <td>Alexander Albon</td>
-    <td>73</td>
-    <td>Thailand</td>
-    <td>Williams</td>
-  </tr>
-    <tr>
-    <td>9</td>
-    <td>Carlos Sainz</td>
-    <td>64</td>
-    <td>Spain</td>
-    <td>Williams</td>
-  </tr>
-    <tr>
-    <td>10</td>
-    <td>Fernando Alonso</td>
-    <td>56</td>
-    <td>Spain</td>
-    <td>Aston Martin</td>
-  </tr>
-    <tr>
-    <td>11</td>
-    <td>Nico Hulkenberg</td>
-    <td>51</td>
-    <td>Germany</td>
-    <td>Kick Sauber</td>
-  </tr>
-    <tr>
-    <td>12</td>
-    <td>Isack Hadjar</td>
-    <td>51</td>
-    <td>France</td>
-    <td>Racing Bulls</td>
-  </tr>
-    <tr>
-    <td>13</td>
-    <td>Oliver Bearman</td>
-    <td>41</td>
-    <td>Great Britain</td>
-    <td>HAAS</td>
-  </tr>
-    <tr>
-    <td>14</td>
-    <td>Liam Lawson</td>
-    <td>38</td>
-    <td>New Zealand</td>
-    <td>RedBull Racing/Racing Bulls</td>
-  </tr>
-    <tr>
-    <td>15</td>
-    <td>Esteban Ocon</td>
-    <td>38</td>
-    <td>France</td>
-    <td>HAAS</td>
-  </tr>
-    <tr>
-    <td>16</td>
-    <td>Lance Stroll</td>
-    <td>33</td>
-    <td>Canada</td>
-    <td>Aston Martin</td>
-  </tr>
-    <tr>
-    <td>17</td>
-    <td>Yuki Tsunoda</td>
-    <td>33</td>
-    <td>Japan</td>
-    <td>Racing Bulls/RedBull Racing</td>
-  </tr>
-    <tr>
-    <td>18</td>
-    <td>Pierre Gasly</td>
-    <td>22</td>
-    <td>France</td>
-    <td>Alpine</td>
-  </tr>
-    <tr>
-    <td>19</td>
-    <td>Gabriel Bortoleto</td>
-    <td>19</td>
-    <td>Brazil</td>
-    <td>Kick Sauber</td>
-  </tr>
-    <tr>
-    <td>20</td>
-    <td>Franco Colapinto</td>
-    <td>0</td>
-    <td>Argentina</td>
-    <td>Alpine</td>
-  </tr>
+  @endforeach
 </table>
 </section>
 
 <section id="teamsstandings" class="teamstandings">
 <h2 id="ConstructorStandings">Team's standings after final race (Abu-Dhabi)</h2>
-<table>
-  <tr style="background: #f2f2f2;">
-    <th>Place</th>
-    <th>Team</th>
-    <th>Points</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>McLaren</td>
-    <td>833</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Mercedes</td>
-    <td>469</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>RedBull Racing</td>
-    <td>451</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Ferrari</td>
-    <td>398</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Williams</td>
-    <td>137</td>
-  </tr>
-    <tr>
-    <td>6</td>
-    <td>Racing Bulls</td>
-    <td>92</td>
-  </tr>
-    <tr>
-    <td>7</td>
-    <td>Aston Martin</td>
-    <td>89</td>
-  </tr>
-    <tr>
-    <td>8</td>
-    <td>HAAS</td>
-    <td>79</td>
-  </tr>
-    <tr>
-    <td>9</td>
-    <td>Kick Sauber</td>
-    <td>70</td>
-  </tr>
-    <tr>
-    <td>10</td>
-    <td>Alpine</td>
-    <td>22</td>
-  </tr>
-
-  </table>
+    <h2>F1 Constructors' Standings 2024</h2>
+    <table>
+        <thead>
+            <tr style="background: #f2f2f2;">
+                <th>Place</th>
+                <th>Team Name</th>
+                <th>Base Location</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($teams as $index => $team)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $team->name }}</td>
+                <td>{{ $team->base_location }}</td>
+                <td>{{ $team->points }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </section>
 <div id="more-info-section">
   <button id="show-more-btn">More Info</button>
@@ -351,5 +192,7 @@
 <a href="https://www.formula1.com/en/latest/article/fia-unveils-formula-1-regulations-for-2026-and-beyond-featuring-more-agile.75qJiYOHXgeJqsVQtDr2UB" class="button">More detailed info!</a>
   </div>
 </div>
+<th>Actions</th>
+
 </body>
 </html>

@@ -3,8 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Team;
 
 class Driver extends Model
 {
-    //
+    protected $fillable = ['name', 'nationality', 'number', 'points', 'team_id'];
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }
