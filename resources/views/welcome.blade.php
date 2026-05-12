@@ -142,8 +142,8 @@
         <form action="/drivers/{{ $driver->id }}" method="POST" style="display:inline;">
             @csrf
             @method('DELETE')
-            <button type="submit" onclick="return confirm('Do you want to delete this driver?')" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold;">
-                [X]
+            <button type="submit" onclick="return confirm('Do you want to delete this driver?')" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; margin: 3px">
+                Delete
             </button>
         </form>
     </td>
