@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nationality');
-            $table->integer('number');
+            $table->integer('number')->nullable();
             $table->integer('points')->default(0);
             $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
             $table->timestamps();

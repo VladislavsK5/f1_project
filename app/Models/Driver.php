@@ -7,7 +7,7 @@ use App\Models\Team;
 
 class Driver extends Model
 {
-    protected $fillable = ['name', 'nationality', 'number', 'points', 'team_id'];
+    protected $fillable = ['name', 'nationality', 'points', 'team_id'];
 
     public function team()
     {

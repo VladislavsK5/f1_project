@@ -31,6 +31,9 @@
             @endauth
         @endif
     </div>
+    <div class="auth-buttons">
+      <a href="{{ route('create') }}" class="btn-auth">Add Driver</a>
+    </div>
     </nav>
   </header>
 
@@ -91,7 +94,6 @@
   <h2>Race Feedback Form</h2>
 
   <form id="raceForm" action="https://www.w3schools.com/action_page.php" method="get">
-
     <label>
       Full Name:
       <input type="text" id="name" name="name">
@@ -116,6 +118,10 @@
 
     <div id="error-messages" style="color:rgb(255, 255, 255); margin-top:10px;"></div>
   </form>
+
+  <hr style="border: 0; border-top: 2px dashed #e10600; margin: 40px 0;">
+
+  <h2>Add New Driver</h2>
 </section>
 
 <section id="Driverstandings" class="standings">
@@ -139,13 +145,17 @@
     <td>{{ $driver->nationality }}</td>
     <td>{{ $driver->team->name }}</td>
     <td>
-        <form action="/drivers/{{ $driver->id }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" onclick="return confirm('Do you want to delete this driver?')" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; margin: 3px">
-                Delete
-            </button>
-        </form>
+    <a href="/drivers/{{ $driver->id }}/edit" style="display: inline-block; background-color: red; color: white; border: none; padding: 5px 10px; margin: 2px; cursor: pointer; font-weight: bold; text-decoration: none; text-align: center; width: 75px; font-size: 14px; border-radius: 4px;">
+        Edit
+    </a>
+
+    <form action="/drivers/{{ $driver->id }}" method="POST" style="display: inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('Do you want to delete this driver?')" style="background-color: red; color: white; border: none; padding: 5px 10px; margin: 2px; cursor: pointer; font-weight: bold; width: 75px; font-size: 14px; border-radius: 4px;">
+            Delete
+        </button>
+    </form>
     </td>
   </tr>
   @endforeach
@@ -170,7 +180,7 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $team->name }}</td>
                 <td>{{ $team->base_location }}</td>
-                <td>{{ $team->points }}</td>
+                <td>{{ $team->calculated_points }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -193,6 +203,8 @@
   </div>
 </div>
 <th>Actions</th>
+
+
 
 </body>
 </html>

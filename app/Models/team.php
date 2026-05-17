@@ -19,4 +19,8 @@ class Team extends Model
     {
         return $this->hasMany(Driver::class);
     }
+    public function getCalculatedPointsAttribute()
+    {
+    return $this->drivers()->sum('points');
+    }
 }
