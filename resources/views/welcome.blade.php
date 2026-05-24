@@ -22,18 +22,23 @@
         <li><a href="#more-info-section">More Info about 2026 season!</a>
       </ul>
       <div class="auth-buttons">
-        @if (Route::has('login'))
-            @auth
-                <a href="{{ url('/dashboard') }}" class="btn-auth">Dashboard</a>
-            @else
-                <a href="{{ route('login') }}" class="btn-auth">Login</a>
-                <a href="{{ route('register') }}" class="btn-auth">Register</a>
-            @endauth
-        @endif
-    </div>
-    <div class="auth-buttons">
-      <a href="{{ route('create') }}" class="btn-auth">Add Driver</a>
-    </div>
+    @auth
+        <span style="color: #fff; font-weight: bold; margin-right: 15px; font-size: 14px; text-transform: uppercase;">
+            Hello, {{ auth()->user()->name }}
+        </span>
+        
+        <a href="#" class="btn-auth" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="background-color: #e10600;">
+            Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @endauth
+    @guest
+        <a href="{{ route('login') }}" class="btn-auth">Login</a>
+        <a href="{{ route('register') }}" class="btn-auth">Register</a>
+    @endguest
+  </div>
     </nav>
   </header>
 
@@ -121,7 +126,7 @@
 
   <hr style="border: 0; border-top: 2px dashed #e10600; margin: 40px 0;">
 
-  <h2>Add New Driver</h2>
+
 </section>
 
 <section id="Driverstandings" class="standings">
@@ -144,19 +149,16 @@
     <td>{{ $driver->points }}</td>
     <td>{{ $driver->nationality }}</td>
     <td>{{ $driver->team->name }}</td>
+    @auth
     <td>
-    <a href="/drivers/{{ $driver->id }}/edit" style="display: inline-block; background-color: red; color: white; border: none; padding: 5px 10px; margin: 2px; cursor: pointer; font-weight: bold; text-decoration: none; text-align: center; width: 75px; font-size: 14px; border-radius: 4px;">
-        Edit
-    </a>
-
-    <form action="/drivers/{{ $driver->id }}" method="POST" style="display: inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" onclick="return confirm('Do you want to delete this driver?')" style="background-color: red; color: white; border: none; padding: 5px 10px; margin: 2px; cursor: pointer; font-weight: bold; width: 75px; font-size: 14px; border-radius: 4px;">
-            Delete
-        </button>
-    </form>
+        <a href="/drivers/{{ $driver->id }}/edit" class="btn-edit">Edit</a>
+        <form action="/drivers/{{ $driver->id }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
     </td>
+  @endauth
   </tr>
   @endforeach
 </table>
