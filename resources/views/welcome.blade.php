@@ -23,7 +23,7 @@
       </ul>
       <div class="auth-buttons">
     @auth
-        <span style="color: #fff; font-weight: bold; margin-right: 15px; font-size: 14px; text-transform: uppercase;">
+        <span style="color: #fff; font-weight: bold; margin-right: 15px; aligh-items: center; font-size: 14px; text-transform: uppercase;">
             Hello, {{ auth()->user()->name }}
         </span>
         
@@ -38,6 +38,11 @@
         <a href="{{ route('login') }}" class="btn-auth">Login</a>
         <a href="{{ route('register') }}" class="btn-auth">Register</a>
     @endguest
+    @can('create', App\Models\Driver::class)
+    <a href="/drivers/create" class="btn-auth" style="background-color: #e10600; text-decoration: none; display: inline-block;">
+        Add Driver
+    </a>
+    @endcan
   </div>
     </nav>
   </header>
@@ -151,13 +156,24 @@
     <td>{{ $driver->team->name }}</td>
     @auth
     <td>
-        <a href="/drivers/{{ $driver->id }}/edit" class="btn-edit">Edit</a>
-        <form action="/drivers/{{ $driver->id }}" method="POST" style="display:inline;">
+    @can('update', $driver)
+        <a href="/drivers/{{ $driver->id }}/edit" 
+           style="display: inline-block; width: 80px; padding: 8px 0; background-color: #e10600; color: white; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase; text-decoration: none; text-align: center; border: none; border-radius: 4px; cursor: pointer; margin-right: 5px;">
+            Edit
+        </a>
+    @endcan
+
+    @can('delete', $driver)
+        <form action="/drivers/{{ $driver->id }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this driver?');">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+            <button type="submit" 
+                    style="display: inline-block; width: 80px; padding: 8px 0; background-color: #e10600; color: white; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase; text-align: center; border: none; border-radius: 4px; cursor: pointer;">
+                Delete
+            </button>
         </form>
-    </td>
+    @endcan
+</td>
   @endauth
   </tr>
   @endforeach
