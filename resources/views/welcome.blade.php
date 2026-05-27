@@ -15,12 +15,12 @@
           <ul class="dropdown">
             <li><a href="#hulkenberg-podium">Hulkenberg Podium</a></li>
             <li><a href="#isaack-podium">Hadjar amazing rookie year</a></li>
-            <li><a href="#lando-champion">Lando Norris wins F1 drivers championship for 1 time in his career</a></li>
+            <li><a href="#lando-champion">Lando Norris wins F1 drivers championship</a></li>
           </ul>
         </li>
         <li><a href="#Standings">Driver's Standings</a></li>
         <li><a href="#ConstructorStandings">Teams's Standings</a></li>
-        <li><a href="#more-info-section">More Info about 2026 season!</a></li>
+        <li><a href="#form-section">Race Feedback Form</a></li>
       </ul>
     </nav>
 
@@ -29,9 +29,9 @@
           <div class="auth-container">
             <span class="auth-username">Hello, {{ auth()->user()->name }}</span>
             
-            @can('create', App\Models\Driver::class)
-              <a href="/drivers/create" class="btn-auth">Add Driver</a>
-            @endcan
+            @if(auth()->check() && auth()->user()->isAdmin())
+              <a href="/drivers/create" class="btn-table btn-edit">Add New Driver</a>
+            @endif
 
             <a href="#" class="btn-auth" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout
@@ -131,54 +131,50 @@
   <hr class="f1-divider">
 </section>
 
-<section id="Driverstandings" class="standings">
-  <h1 id="Standings">Driver Standings after final race (Abu-Dhabi)</h1>
+<section id="Standings" class="standings">
+  <h1>Driver Standings after final race (Abu-Dhabi)</h1>
 
   <table>
-  <thead>
-    <tr class="table-header">
-      <th>Place</th>
-      <th>Driver</th>
-      <th>Points</th>
-      <th>Nationality</th>
-      <th>Team</th>
-      @can('create', App\Models\Driver::class) 
-        <th>Actions</th> 
-      @endcan
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($drivers as $index => $driver)
-    <tr>
-      <td>{{ $index + 1 }}</td> 
-      <td>{{ $driver->name }}</td>
-      <td>{{ $driver->points }}</td>
-      <td>{{ $driver->nationality }}</td>
-      <td>{{ $driver->team->name }}</td>
-      
-      @if(Auth::user() && (Auth::user()->can('update', $driver) || Auth::user()->can('delete', $driver)))
-      <td>
-        @can('update', $driver)
+    <thead>
+      <tr class="table-header">
+        <th>Place</th>
+        <th>Driver</th>
+        <th>Points</th>
+        <th>Nationality</th>
+        <th>Team</th>
+        @if(auth()->check() && auth()->user()->isAdmin())
+          <th>Actions</th> 
+        @endif
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($drivers as $index => $driver)
+      <tr>
+        <td>{{ $index + 1 }}</td> 
+        <td>{{ $driver->name }}</td>
+        <td>{{ $driver->points }}</td>
+        <td>{{ $driver->nationality }}</td>
+        <td>{{ $driver->team->name }}</td>
+        
+        @if(auth()->check() && auth()->user()->isAdmin())
+        <td>
           <a href="/drivers/{{ $driver->id }}/edit" class="btn-table btn-edit">Edit</a>
-        @endcan
 
-        @can('delete', $driver)
           <form action="/drivers/{{ $driver->id }}" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete this driver?');">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn-table">Delete</button>
           </form>
-        @endcan
-      </td>
-      @endif
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+        </td>
+        @endif
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
 </section>
 
-<section id="teamsstandings" class="teamstandings">
-  <h2 id="ConstructorStandings">Team's standings after final race (Abu-Dhabi)</h2>
+<section id="ConstructorStandings" class="teamstandings">
+  <h2>Team's standings after final race (Abu-Dhabi)</h2>
   <h2>F1 Constructors' Standings 2025</h2>
   <table>
     <thead>
@@ -202,4 +198,5 @@
   </table>
 </section>
 </body>
+
 </html>

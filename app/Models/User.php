@@ -6,17 +6,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    // 1. Меняем 'role' на 'role_id'
+    protected $fillable = ['name', 'email', 'password', 'role_id'];
 
     protected $casts = ['password' => 'hashed'];
 
-    public function isAdmin(): bool
+    public function role()
     {
-        return $this->role === 'admin';
+    return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function isRegularUser(): bool
+    public function isAdmin(): bool
     {
-        return $this->role === 'user';
+    $role = $this->role()->first();
+    return $role && $role->slug === 'admin';
     }
 }
