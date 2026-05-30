@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Driver: {{ $driver->name }}</title>
+    <title>{{ __('messages.Edit Driver') }}: {{ $driver->name }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
     <main class="form-section">
         
-        <h2>Edit Driver: {{ $driver->name }}</h2>
+        <h2>{{ __('messages.Edit Driver') }}: {{ $driver->name }}</h2>
 
         @if ($errors->any())
             <div class="form-errors">
@@ -25,16 +25,16 @@
             @csrf
             @method('PUT')
 
-            <p>Name:</p>
+            <p>{{ __('messages.Name') }}:</p>
             <input type="text" name="name" value="{{ old('name', $driver->name) }}" required>
 
-            <p>Points:</p>
+            <p>{{ __('messages.Points') }}:</p>
             <input type="number" name="points" value="{{ old('points', $driver->points) }}" required>
 
-            <p>Nationality:</p>
+            <p>{{ __('messages.Nationality') }}:</p>
             <input type="text" name="nationality" value="{{ old('nationality', $driver->nationality) }}" required>
 
-            <p>Team:</p>
+            <p>{{ __('messages.Team') }}:</p>
             <select name="team_id" required>
                 @foreach($teams as $team)
                     <option value="{{ $team->id }}" {{ old('team_id', $driver->team_id) == $team->id ? 'selected' : '' }}>
@@ -45,8 +45,8 @@
 
             <br><br>
             
-            <button type="submit">Save Changes</button>
-            <a href="/" class="btn-table">Cancel</a>
+            <button type="submit">{{ __('messages.Save Changes') }}</button>
+            <a href="/" class="btn-table">{{ __('messages.Cancel') }}</a>
         </form>
         
     </main>

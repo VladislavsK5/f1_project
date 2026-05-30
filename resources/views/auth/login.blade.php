@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>F1 Standings - Login</title>
+    <title>{{ __('messages.Sign In') }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
     <main class="form-section">
         
-        <h2>Sign In</h2>
+        <h2>{{ __('messages.Sign In') }}</h2>
 
         @if ($errors->any())
             <div class="form-errors">
@@ -27,13 +27,13 @@
             <p>Email:</p>
             <input type="email" name="email" value="{{ old('email') }}" required>
 
-            <p>Password:</p>
+            <p>{{ __('messages.Password') }}:</p>
             <input type="password" name="password" required>
 
             <br><br>
             
-            <button type="submit">Login</button>
-            <a href="/" class="btn-table">Cancel</a>
+            <button type="submit">{{ __('messages.Login') }}</button>
+            <a href="/" class="btn-table">{{ __('messages.Cancel') }}</a>
         </form>
         
     </main>

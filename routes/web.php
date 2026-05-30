@@ -3,6 +3,8 @@
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
 
 Route::get('/', [DriverController::class, 'index']);
 
@@ -21,6 +23,13 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
+
+Route::get('lang/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'lv'])) {
+        Session::put('locale', $lang);
+    }
+    return redirect()->back();
+})->name('lang.switch');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 

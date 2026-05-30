@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>F1 Standings - Register</title>
+    <title>{{ __('messages.Register') }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
     <main class="form-section">
         
-        <h2>Create Account</h2>
+        <h2>{{ __('messages.Create Account') }}</h2>
 
         @if ($errors->any())
             <div class="form-errors">
@@ -24,22 +24,22 @@
         <form action="{{ route('register') }}" method="POST" novalidate>
             @csrf
 
-            <p>Name:</p>
+            <p>{{ __('messages.Name') }}:</p>
             <input type="text" name="name" value="{{ old('name') }}" required>
 
             <p>Email:</p>
             <input type="email" name="email" value="{{ old('email') }}" required>
 
-            <p>Password:</p>
+            <p>{{ __('messages.Password') }}:</p>
             <input type="password" name="password" required>
 
-            <p>Confirm Password:</p>
+            <p>{{ __('messages.Confirm Password') }}:</p>
             <input type="password" name="password_confirmation" required>
 
             <br><br>
             
-            <button type="submit">Register</button>
-            <a href="/" class="btn-table">Cancel</a>
+            <button type="submit">{{ __('messages.Register') }}</button>
+            <a href="/" class="btn-table">{{ __('messages.Cancel') }}</a>
         </form>
 
     </main>

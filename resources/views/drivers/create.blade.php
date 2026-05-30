@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Driver</title>
+    <title>{{ __('messages.Add New Driver') }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
     <main class="form-section">
         
-        <h2>Add New Driver</h2>
+        <h2>{{ __('messages.Add New Driver') }}</h2>
 
         @if ($errors->any())
             <div class="form-errors">
@@ -24,18 +24,18 @@
         <form action="/drivers" method="POST" novalidate>
             @csrf
 
-            <p>Name:</p>
+            <p>{{ __('messages.Name') }}:</p>
             <input type="text" name="name" value="{{ old('name') }}" required>
 
-            <p>Points:</p>
+            <p>{{ __('messages.Points') }}:</p>
             <input type="number" name="points" value="{{ old('points', 0) }}" required>
 
-            <p>Nationality:</p>
+            <p>{{ __('messages.Nationality') }}:</p>
             <input type="text" name="nationality" value="{{ old('nationality') }}" required>
 
-            <p>Team:</p>
+            <p>{{ __('messages.Team') }}:</p>
             <select name="team_id" required>
-                <option value="">-- Select Team --</option>
+                <option value="">{{ __('messages.Select Team') }}</option>
                 @foreach($teams as $team)
                     <option value="{{ $team->id }}" {{ old('team_id') == $team->id ? 'selected' : '' }}>
                         {{ $team->name }}
@@ -45,8 +45,8 @@
 
             <br><br>
             
-            <button type="submit">Create Driver</button>
-            <a href="/" class="btn-table">Cancel</a>
+            <button type="submit">{{ __('messages.Create Driver') }}</button>
+            <a href="/" class="btn-table">{{ __('messages.Cancel') }}</a>
         </form>
         
     </main>
