@@ -11,6 +11,7 @@ Route::get('/', [DriverController::class, 'index']);
 Route::middleware('auth')->group(function () {
     Route::get('/drivers/create', [DriverController::class, 'create'])->name('create');
     Route::post('/drivers', [DriverController::class, 'store']);
+    Route::post('/drivers/{id}/restore', [DriverController::class, 'restore'])->name('drivers.restore');
     Route::get('/drivers/{driver}/edit', [DriverController::class, 'edit']);
     Route::put('/drivers/{driver}', [DriverController::class, 'update']);
     Route::delete('/drivers/{driver}', [DriverController::class, 'destroy']);

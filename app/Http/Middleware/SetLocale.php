@@ -9,10 +9,17 @@ use Illuminate\Support\Facades\Session;
 class SetLocale
 {
     public function handle($request, Closure $next)
-    {
-        if (Session::has('locale')) {
-            App::setLocale(Session::get('locale'));
-        }
-        return $next($request);
+{
+    if (session()->has('locale')) {
+        app()->setLocale(session()->get('locale'));
+    } else {
+
+        $browserLang = $request->getPreferredLanguage(['en', 'lv']);
+        app()->setLocale($browserLang);
+        
+        session()->put('locale', $browserLang);
     }
+
+    return $next($request);
+}
 }

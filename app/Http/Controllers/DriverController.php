@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Driver;
 use App\Models\Team;
+use App\Models\Driver; 
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -13,8 +13,9 @@ class DriverController extends Controller
         $teams = \App\Models\Team::withSum('drivers', 'points')
             ->orderBy('drivers_sum_points', 'desc')
             ->get();
+        $trashedDrivers = \App\Models\Driver::onlyTrashed()->get();
 
-        return view('welcome', compact('drivers', 'teams'));
+        return view('welcome', compact('drivers', 'teams', 'trashedDrivers'));
     }  
 
     public function create(Request $request) {
@@ -76,5 +77,14 @@ class DriverController extends Controller
 
         $driver->delete();
         return redirect('/')->with('success', 'Driver deleted!');
+    }
+
+    public function restore($id)
+    {
+        $driver = Driver::onlyTrashed()->findOrFail($id);
+        
+        $driver->restore();
+
+        return redirect('/')->with('success', 'Driver restored successfully!');
     }
 }

@@ -65,4 +65,6 @@ return [
     'Create Driver' => 'Izveidot pilotu',
     'Edit Driver' => 'Rediģēt pilotu',
     'Save Changes' => 'Saglabāt izmaiņas',
+    'Deleted Drivers' => 'Dzēstie piloti',
+    'Restore'=> 'Atjaunot',
 ];

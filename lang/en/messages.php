@@ -65,4 +65,6 @@ return [
     'Create Driver' => 'Create Driver',
     'Edit Driver' => 'Edit Driver',
     'Save Changes' => 'Save Changes',
+    'Deleted Drivers' => 'Deleted Drivers',
+    'Restore'=> 'Restore',
 ];

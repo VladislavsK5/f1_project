@@ -159,6 +159,27 @@
       @endforeach
     </tbody>
   </table>
+
+  @if(auth()->check() && auth()->user()->isAdmin() && $trashedDrivers->count() > 0)
+  <main class="form-section">
+    <h2>{{ __('messages.Deleted Drivers') ?? 'Удаленные пилоты' }}</h2>
+    <div class="form-errors">
+      <ul>
+        @foreach($trashedDrivers as $trashed)
+          <li>
+            <span>{{ $trashed->name }} ({{ $trashed->nationality }}) — {{ $trashed->points }} pts</span>
+            <form action="{{ route('drivers.restore', $trashed->id) }}" method="POST" class="inline-form">
+              @csrf
+              <button type="submit" class="btn-table btn-edit">
+                {{ __('messages.Restore') ?? 'Восстановить' }}
+              </button>
+            </form>
+          </li>
+        @endforeach
+      </ul>
+    </div>
+  </main>
+  @endif
 </section>
 
 <section id="ConstructorStandings" class="teamstandings">
