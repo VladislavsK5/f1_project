@@ -9,7 +9,7 @@
 
     <main class="form-section">
         
-        <h2>{{ __('messages.Sign In') }}</h2>
+        <h1>{{ __('messages.Sign In') }}</h1>
 
         @if ($errors->any())
             <div class="form-errors">
@@ -22,7 +22,7 @@
         @endif
 
         <form action="{{ route('login') }}" method="POST" novalidate>
-            @csrf
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <p>Email:</p>
             <input type="email" name="email" value="{{ old('email') }}" required>

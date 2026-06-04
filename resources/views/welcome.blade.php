@@ -49,16 +49,14 @@
         @endguest
     </div>
     <div class="lang-container">
-    <button class="btn-auth">
-        {{ strtoupper(session('locale', 'en')) }} 🌐
-    </button>
-    <ul class="lang-menu-simple">
-        <div class="menu-inner">
-            <li><a href="{{ route('lang.switch', 'en') }}">{{ __('messages.English') }}</a></li>
-            <li><a href="{{ route('lang.switch', 'lv') }}">{{ __('messages.Latvian') }}</a></li>
-        </div>
-    </ul>
-    </div>
+  <button class="btn-auth">
+    {{ strtoupper(session('locale', 'en')) }} 🌐
+  </button>
+  <ul class="lang-menu-simple menu-inner">
+    <li><a href="{{ route('lang.switch', 'en') }}">{{ __('messages.English') }}</a></li>
+    <li><a href="{{ route('lang.switch', 'lv') }}">{{ __('messages.Latvian') }}</a></li>
+  </ul>
+  </div>
   </header>
 
 <section id="Description" class="description">

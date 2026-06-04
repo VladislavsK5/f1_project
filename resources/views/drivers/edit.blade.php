@@ -9,7 +9,7 @@
 
     <main class="form-section">
         
-        <h2>{{ __('messages.Edit Driver') }}: {{ $driver->name }}</h2>
+        <h1>{{ __('messages.Edit Driver') }}: {{ $driver->name }}</h1>
 
         @if ($errors->any())
             <div class="form-errors">
@@ -22,8 +22,9 @@
         @endif
 
         <form action="/drivers/{{ $driver->id }}" method="POST" novalidate>
-            @csrf
-            @method('PUT')
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            
+            <input type="hidden" name="_method" value="PUT">
 
             <p>{{ __('messages.Name') }}:</p>
             <input type="text" name="name" value="{{ old('name', $driver->name) }}" required>
@@ -35,7 +36,7 @@
             <input type="text" name="nationality" value="{{ old('nationality', $driver->nationality) }}" required>
 
             <p>{{ __('messages.Team') }}:</p>
-            <select name="team_id" required>
+            <select name="team_id">
                 @foreach($teams as $team)
                     <option value="{{ $team->id }}" {{ old('team_id', $driver->team_id) == $team->id ? 'selected' : '' }}>
                         {{ $team->name }}
