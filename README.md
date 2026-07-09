@@ -12,7 +12,7 @@ This system provides an intuitive interface for managing F1 driver statistics. I
 * **Data Integrity:** Relational database structure (3NF) linking drivers to teams.
 * **Security:** CSRF protection, password hashing (bcrypt), and server-side input validation.
 
-## 🏗 Tech Stack
+## Tech Stack
 * **Backend:** PHP 8, Laravel Framework.
 * **Database:** MySQL.
 * **Frontend:** Blade, CSS, HTML.
